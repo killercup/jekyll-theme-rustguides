@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>{{ page.title }}</title>
+  <link rel="stylesheet" href="/assets/style.css"/>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="header-nav site-container">
+      <div class="header-nav__title">
+        <a href="/{{link.url}}" class="header-nav__headline">{{site.title}}</a>
+        <p class="header-nav__description">
+          {{site.description}}
+        </p>
+      </div>
+      <div class="header-nav__links">
+      {% if site.html_pages and site.html_pages.size > 0 %}
+        <span class="header-nav__links-info">Pages: </span>
+      {% endif %}
+      {% for link in site.html_pages %}
+        {% unless link.url == "/" or link.hidden_in_menu %}
+          <a href="{{link.url}}" class="header-nav__link">{{link.title}}</a>
+        {% endunless %}
+      {% endfor %}
+      </div>
+    </nav>
+  </header>
+  <main class="site-container main-content">
+    {{content}}
+  </main>
+  <footer class="site-container site-footer">
+    <nav>
+    </nav>
+  </footer>
+</body>
+</html>
