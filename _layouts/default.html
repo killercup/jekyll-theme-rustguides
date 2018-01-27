@@ -4,13 +4,13 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>{{ page.title }}</title>
-  <link rel="stylesheet" href="/assets/style.css"/>
+  <link rel="stylesheet" href="{{ "/assets/style.css" | relative_url }}"/>
 </head>
 <body>
   <header class="site-header">
     <nav class="header-nav site-container">
       <div class="header-nav__title">
-        <a href="/{{link.url}}" class="header-nav__headline">{{site.title}}</a>
+        <a href="{{link.url | relative_url}}" class="header-nav__headline">{{site.title}}</a>
         <p class="header-nav__description">
           {{site.description}}
         </p>
@@ -21,7 +21,7 @@
       {% endif %}
       {% for link in site.html_pages %}
         {% unless link.url == "/" or link.hidden_in_menu %}
-          <a href="{{link.url}}" class="header-nav__link">{{link.title}}</a>
+          <a href="{{link.url | relative_url}}" class="header-nav__link">{{link.title}}</a>
         {% endunless %}
       {% endfor %}
       </div>
