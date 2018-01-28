@@ -1,54 +1,110 @@
+body {
+    background-color: $brand-color-dark;
+}
+
 .site-container {
     max-width: $site-container-width;
-    margin: 2em auto;
-    padding: 0 1em;
+    margin: 0 auto;
+    padding: 2em 1em;
 }
 
 .site-header {
     background-color: $brand-color;
-    color: $invert-color;
-    padding: 0.6em 0 1em;
-
-    a {
-        color: $invert-color;
-        text-decoration: none;
+    &, a {
+        color: invert-color($brand-color);
     }
-}
+    
+    padding: 0.6em 0 0;
 
-.header-nav {
     &__headline {
         font-size: 2em;
         font-weight: bold;
     }
 
     &__description {
-        font-size: 0.9em;
+        font-size: $small-font-size;
         text-transform: uppercase;
         margin: 0 0 1em;
-    }
+        
+        &--links {
+            a + a {
+                display: inline-block;
 
-    &__links {
-        &-info {
-            font-size: 0.9em;
-            text-transform: uppercase;
-        }
-    }
-
-    &__link {
-        display: inline-block;
-
-        & + & {
-            &::before {
-                content: "/";
-                padding-left: 0.4em;
-                padding-right: 0.4em;
+                &::before {
+                    content: "–";
+                    padding-left: 1em;
+                    padding-right: 1em;
+                }
             }
         }
     }
 }
 
+.header-nav {
+    background-color: $brand-color-light;
+    &, a {
+        color: invert-color($brand-color-light);
+    }
+
+    &__links {
+        list-style-type: circle;
+        padding-left: 2em;
+
+        &-info {
+            font-size: 0.9em;
+            text-transform: uppercase;
+        }
+    }
+    
+    &__link-item {
+        & + & {
+            margin-top: 0.4em;
+        }
+    }
+
+    &__link {
+        display: block;
+
+        &:hover {
+            text-decoration: none;
+
+            span {
+                text-decoration: underline;
+            }
+        }
+
+        &--current {
+            &::after {
+                content: "You are here";
+                color: $brand-color-light;
+                background-color: $brand-color-dark;
+                padding: 0 3px;
+                font-size: $small-font-size;
+                border-radius: 3px;
+            }
+        }
+    }
+}
+
+.site-content {
+    background-color: $background-color;
+    padding: 2em 0;
+}
+
 .main-content {
     > h1:first-child {
         margin-bottom: 1em;
+    }
+
+    a {
+        text-decoration: underline;
+    }
+}
+
+.site-footer {
+    background-color: $brand-color-dark;
+
+    &, a {
+        color: invert-color($brand-color-dark);
     }
 }

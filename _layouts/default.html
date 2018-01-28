@@ -4,34 +4,63 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>{{ page.title }}</title>
-  <link rel="stylesheet" href="{{ "/assets/style.css" | relative_url }}"/>
+  <style type="text/css">
+    {% capture include_to_scssify -%}
+      {% include style.scss %}
+    {% endcapture -%}
+    {{ include_to_scssify | scssify }}
+  </style>
 </head>
 <body>
   <header class="site-header">
-    <nav class="header-nav site-container">
-      <div class="header-nav__title">
-        <a href="{{link.url | relative_url}}" class="header-nav__headline">{{site.title}}</a>
-        <p class="header-nav__description">
-          {{site.description}}
-        </p>
-      </div>
-      <div class="header-nav__links">
-      {% if site.html_pages and site.html_pages.size > 0 %}
-        <span class="header-nav__links-info">Pages: </span>
-      {% endif %}
-      {% for link in site.html_pages %}
-        {% unless link.url == "/" or link.hidden_in_menu %}
-          <a href="{{link.url | relative_url}}" class="header-nav__link">{{link.title}}</a>
-        {% endunless %}
-      {% endfor %}
-      </div>
-    </nav>
+    <div class="site-header__title site-container">
+      <a href="{{link.url | relative_url}}" class="site-header__headline">{{site.title}}</a>
+      <p class="site-header__description">
+        {{site.description}}
+        {% if site.header and site.header.nav and site.header.nav.size > 0 -%}
+        {% endif -%}
+      </p>
+      <p class="site-header__description site-header__description--links">
+        {% for link in site.header.nav -%}
+          <a href="{{link[1]}}">{{link[0]}}</a>
+        {% endfor -%}
+      </p>
+    </div>
   </header>
-  <main class="site-container main-content">
-    {{content}}
-  </main>
-  <footer class="site-container site-footer">
-    <nav>
+  {% if site.html_pages and site.html_pages.size > 1 -%}
+  <nav class="header-nav">
+    <ul class="header-nav__links site-container">
+      {% for link in site.html_pages -%}
+        {% if link.url == '/' -%}
+          <li class="header-nav__link-item">
+            <a href="{{link.url | relative_url}}" class="header-nav__link{% if link.url == page.url %} header-nav__link--current{% endif %}">
+              <span>{{link.title}}</span>
+            </a>
+          </li>
+        {% endif -%}
+      {% endfor -%}
+      {% for link in site.html_pages -%}
+        {% unless link.url == '/' or link.hidden_in_menu -%}
+          <li class="header-nav__link-item">
+            <a href="{{link.url | relative_url}}" class="header-nav__link{% if link.url == page.url %} header-nav__link--current{% endif %}">
+              <span>{{link.title}}</span>
+            </a>
+          </li>
+        {% endunless -%}
+      {% endfor -%}
+    </ul>
+  </nav>
+  {% endif -%}
+  <div class="site-content">
+    <main class="main-content site-container">
+      {{content}}
+    </main>
+  </div>
+  <footer class="site-footer">
+    <nav class="site-container">
+      {% if site.github and site.github.repository_url -%}
+        <a href="{{site.github.repository_url}}">This project on Github</a>
+      {% endif -%}
     </nav>
   </footer>
 </body>
