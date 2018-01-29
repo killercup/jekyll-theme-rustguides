@@ -14,7 +14,7 @@
 <body>
   <header class="site-header">
     <div class="site-header__title site-container">
-      <a href="{{link.url | relative_url}}" class="site-header__headline">{{site.title}}</a>
+      <a href="{{"/" | relative_url}}" class="site-header__headline">{{site.title}}</a>
       <p class="site-header__description">
         {{site.description}}
         {% if site.header and site.header.nav and site.header.nav.size > 0 -%}
