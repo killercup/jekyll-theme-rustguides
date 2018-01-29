@@ -12,14 +12,13 @@ $spacing-unit:     30px !default;
 $text-color:       #111 !default;
 $background-color: #fdfdfd !default;
 
-{% if site.colors.brand %}
-    $brand-color:  {{site.colors.brand}};
-{% else %}
-    $brand-color:  #2568ba !default;
-{% endif %}
 
+$brand-color:  #2568ba !default;
+{% if site.colors.brand %}$brand-color: {{site.colors.brand}};{% endif %}
 $brand-color-dark:  darken($brand-color, 15%) !default;
+{% if site.colors.brand-dark %}$brand-color-dark: {{site.colors.brand-dark}};{% endif %}
 $brand-color-light: lighten($brand-color, 15%) !default;
+{% if site.colors.brand-light %}$brand-color-light: {{site.colors.brand-light}};{% endif %}
 
 $grey-color:       #828282 !default;
 $grey-color-light: lighten($grey-color, 40%) !default;
