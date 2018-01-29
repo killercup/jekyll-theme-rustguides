@@ -27,6 +27,11 @@ body {
         margin: 0 0 1em;
         
         &--links {
+            a {
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
             a + a {
                 display: inline-block;
 
